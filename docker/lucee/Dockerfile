@@ -8,4 +8,4 @@ COPY ./root_home/.vimrc /root/.vimrc
 
 WORKDIR  /var/www
 
-EXPOSE 8080
+EXPOSE 8888
