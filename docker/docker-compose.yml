@@ -12,3 +12,25 @@ services:
             - ../phpunit.xml.dist:/usr/share/cfml-in-docker/phpunit.xml.dist
         stdin_open: true
         tty: true
+        networks:
+            - backend
+
+    nginx:
+        build:
+            context: ./nginx
+        volumes:
+            - ../public:/usr/share/nginx/html
+            - ../var/log:/var/log
+            - ./nginx/root_home:/root
+        ports:
+            - "80:80"
+        stdin_open: true
+        tty: true
+        networks:
+            backend:
+                aliases:
+                    - cfml-in-docker.backend
+
+networks:
+    backend:
+        driver: "bridge"
