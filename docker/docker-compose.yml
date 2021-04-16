@@ -31,6 +31,23 @@ services:
                 aliases:
                     - cfml-in-docker.backend
 
+    lucee:
+        build:
+            context: ./lucee
+        volumes:
+            - ../public:/var/www
+            - ../var/log/tomcat:/usr/local/tomcat/log
+            - ../var/log/lucee:/opt/lucee/web/logs
+            - ./lucee/root_home:/root
+        ports:
+            - "8888:8888"
+        stdin_open: true
+        tty: true
+        networks:
+            backend:
+                aliases:
+                    - cfml-in-docker.lucee
+
 networks:
     backend:
         driver: "bridge"
