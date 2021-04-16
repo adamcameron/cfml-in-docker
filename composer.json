@@ -1,0 +1,22 @@
+{
+    "name": "adamcameron/cfml-in-docker",
+    "description": "CFML in Docker",
+    "license": "GPL-3.0-or-later",
+    "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+			"adamCameron\\cfmlInDocker\\test\\": "test/php/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --testdox"
+    }
+}

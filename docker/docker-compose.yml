@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+    php-cli:
+        build:
+            context: ./php-cli
+        volumes:
+            - ./php-cli/root_home/.bash_history:/root/.bash_history
+            - ../test/php:/usr/share/cfml-in-docker/test/php
+            - ../composer.json:/usr/share/cfml-in-docker/composer.json
+            - ../composer.lock:/usr/share/cfml-in-docker/composer.lock
+            - ../phpunit.xml.dist:/usr/share/cfml-in-docker/phpunit.xml.dist
+        stdin_open: true
+        tty: true
