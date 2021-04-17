@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
 class NginxTest extends TestCase
 {
     /** @testdox It serves gdayWorld.html as 200-OK */
-    public function testReturns200OK()
+    public function testHtmlReturns200OK()
     {
-        $client = new Client(['base_uri' => 'http://cfml-in-docker.backend/']);
+        $client = new Client(['base_uri' => 'http://cfml-in-docker.frontend/']);
 
         $response = $client->get('gdayWorld.html');
 
         $this->assertEquals(200, $response->getStatusCode());
         $content = $response->getBody()->getContents();
-        $this->assertMatchesRegularExpression("/^\\s*G'day world!\\s*$/", $content);
+        $this->assertSame("G'day world!", trim($content));
     }
 }

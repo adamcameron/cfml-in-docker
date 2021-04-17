@@ -1,0 +1,1 @@
+<cfoutput>#CGI.remote_addr#</cfoutput>

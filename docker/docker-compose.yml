@@ -29,7 +29,7 @@ services:
         networks:
             backend:
                 aliases:
-                    - cfml-in-docker.backend
+                    - cfml-in-docker.frontend
 
     lucee:
         build:
