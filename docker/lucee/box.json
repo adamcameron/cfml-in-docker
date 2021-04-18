@@ -1,0 +1,12 @@
+{
+    "dependencies":{
+        "cfwheels":"^2.2.0"
+    },
+    "devDependencies":{
+        "testbox":"^4.2.1+400"
+    },
+    "installPaths":{
+        "testbox":"vendor/testbox/",
+        "cfwheels":"vendor/cfwheels/"
+    }
+}

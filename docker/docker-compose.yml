@@ -34,8 +34,14 @@ services:
     lucee:
         build:
             context: ./lucee
+            args:
+                - LUCEE_PASSWORD=${LUCEE_PASSWORD}
+        environment:
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
-            - ../public:/var/www
+            - ../root/src:/var/www/src
+            - ../test:/var/www/test
+            - ../public:/var/www/public
             - ../var/log/tomcat:/usr/local/tomcat/log
             - ../var/log/lucee:/opt/lucee/web/logs
             - ./lucee/root_home:/root
@@ -47,6 +53,30 @@ services:
             backend:
                 aliases:
                     - cfml-in-docker.lucee
+
+    mariadb:
+        build:
+            context: ./mariadb
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysqlData:/var/lib/mysql
+            - ./mariadb/root_home:/root
+            - ../var/log:/var/log
+        stdin_open: true
+        tty: true
+        networks:
+            backend:
+                aliases:
+                    - database.backend
+
+volumes:
+    mysqlData:
 
 networks:
     backend:
