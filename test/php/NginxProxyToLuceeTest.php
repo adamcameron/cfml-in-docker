@@ -43,7 +43,7 @@ class NginxProxyToLuceeTest extends TestCase
             'base_uri' => 'http://cfml-in-docker.lucee:8888/',
             'http_errors' => false
         ]);
-        $response = $directClient->get('remoteAddrTest.cfm');
+        $response = $directClient->get('public/remoteAddrTest.cfm');
         $expectedRemoteAddr = $response->getBody()->getContents();
 
         $proxiedClient = new Client([

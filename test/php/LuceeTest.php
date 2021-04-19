@@ -13,7 +13,7 @@ class LuceeTest extends TestCase
     {
         $client = new Client(['base_uri' => 'http://cfml-in-docker.lucee:8888/']);
 
-        $response = $client->get('gdayWorld.cfm');
+        $response = $client->get('public/gdayWorld.cfm');
 
         $this->assertEquals(200, $response->getStatusCode());
         $content = $response->getBody()->getContents();

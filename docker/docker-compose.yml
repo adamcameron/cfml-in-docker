@@ -35,7 +35,9 @@ services:
         build:
             context: ./lucee
         volumes:
-            - ../public:/var/www
+            - ../root/src:/var/www/src
+            - ../test:/var/www/test
+            - ../public:/var/www/public
             - ../var/log/tomcat:/usr/local/tomcat/log
             - ../var/log/lucee:/opt/lucee/web/logs
             - ./lucee/root_home:/root
