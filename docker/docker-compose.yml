@@ -34,6 +34,8 @@ services:
     lucee:
         build:
             context: ./lucee
+            args:
+                - LUCEE_PASSWORD=${LUCEE_PASSWORD}
         volumes:
             - ../root/src:/var/www/src
             - ../test:/var/www/test
