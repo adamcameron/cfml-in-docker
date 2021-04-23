@@ -4,5 +4,8 @@
     },
     "installPaths":{
         "testbox":"vendor/testbox/"
+    },
+    "testbox":{
+        "runner":"http://localhost:8888/test/runTests.cfm"
     }
 }
