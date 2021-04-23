@@ -7,6 +7,7 @@ RUN apt-get install vim --yes
 
 COPY ./root_home/.bashrc /root/.bashrc
 COPY ./root_home/.vimrc /root/.vimrc
+COPY ./web.xml /usr/local/tomcat/conf/web.xml
 
 WORKDIR  /var/www
 
