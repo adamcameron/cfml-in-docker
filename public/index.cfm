@@ -1,3 +1,1 @@
-<cfdump var="#CGI.SCRIPT_NAME#">
-<cfdump var="#CGI.PATH_INFO#">
-<cfdump var="#URL#">
+<cfoutput>#CGI.path_info#</cfoutput>
