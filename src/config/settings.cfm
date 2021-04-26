@@ -9,9 +9,8 @@
 // set(dataSourceUserName="");
 // set(dataSourcePassword="");
 
-srcPrefix = "../../src"
+srcPrefix = "../src"
 
-set(eventPath="#srcPrefix#/events")
 set(eventPath = "#srcPrefix#/events")
 set(filePath = "#srcPrefix#/files")
 set(modelPath = "#srcPrefix#/models")
@@ -21,8 +20,8 @@ set(pluginComponentPath = "#srcPrefix#/plugins")
 set(viewPath = "#srcPrefix#/views")
 set(controllerPath = "#srcPrefix#/controllers")
 
-publicPrefix = "../../public"
-set(imagePath = "#publicPrefix#/images")
-set(javascriptPath = "#publicPrefix#/javascripts")
-set(stylesheetPath = "#publicPrefix#/stylesheets")
+set(webPath = "")
+set(imagePath = "images")
+set(javascriptPath = "javascripts")
+set(stylesheetPath = "stylesheets")
 </cfscript>
