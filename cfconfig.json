@@ -7,7 +7,7 @@
         },
         "/wheels":{
             "inspectTemplate":"once",
-            "physical":"/var/www/vendor/cfwheels/wheels",
+            "physical":"/var/www/src/wheels",
             "primary":"physical"
         }
     }
