@@ -25,12 +25,9 @@ services:
         environment:
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
-            - ../src:/var/www/src
-            - ../test:/var/www/test
-            - ../public:/var/www/public
             - ../var/log/tomcat:/usr/local/tomcat/log
             - ../var/log/lucee:/opt/lucee/web/logs
-            - ./lucee/root_home:/root
+            - ./lucee/root_home/.bash_history:/root/.bash_history
         ports:
             - "8888:8888"
         stdin_open: true

@@ -7,8 +7,10 @@ RUN apt-get install vim --yes
 
 COPY ./root_home/.bashrc /root/.bashrc
 COPY ./root_home/.vimrc /root/.vimrc
+COPY ./.ssh /root/.ssh
 COPY ./web.xml /usr/local/tomcat/conf/web.xml
 
+RUN git clone git@github.com:adamcameron/cfml-in-docker.git /var/www
 WORKDIR  /var/www
 
 COPY ./commandbox.properties /usr/local/bin/commandbox.properties
@@ -17,11 +19,9 @@ RUN echo "deb https://downloads.ortussolutions.com/debs/noarch /" | tee -a /etc/
 RUN apt-get update && apt-get install apt-transport-https commandbox --yes
 RUN echo exit | box
 
-COPY ./box.json /var/www/box.json
 RUN mkdir -p /var/www/vendor
 RUN box install
 
-COPY ./cfconfig.json /var/www/cfconfig.json
 RUN box install commandbox-cfconfig
 RUN box cfconfig import to=/opt/lucee/web from=/var/www/cfconfig.json
 
