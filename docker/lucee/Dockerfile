@@ -7,6 +7,7 @@ RUN apt-get install vim --yes
 
 COPY ./root_home/.bashrc /root/.bashrc
 COPY ./root_home/.vimrc /root/.vimrc
+COPY ./root_home/.gitconfig /root/.gitconfig
 COPY ./.ssh /root/.ssh
 RUN chmod 600 /root/.ssh/id_ed25519
 COPY ./web.xml /usr/local/tomcat/conf/web.xml
