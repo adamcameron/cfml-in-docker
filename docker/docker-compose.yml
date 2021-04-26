@@ -60,11 +60,10 @@ services:
             backend:
                 aliases:
                     - database.backend
-    
+
 volumes:
     mysqlData:
-                
-                
+
 networks:
     backend:
         driver: "bridge"

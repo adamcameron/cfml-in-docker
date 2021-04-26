@@ -1,0 +1,14 @@
+{
+    "CFMappings":{
+        "/cfmlInDocker":{
+            "inspectTemplate":"once",
+            "physical":"/var/www/src",
+            "primary":"physical"
+        },
+        "/wheels":{
+            "inspectTemplate":"once",
+            "physical":"/var/www/vendor/cfwheels/wheels",
+            "primary":"physical"
+        }
+    }
+}

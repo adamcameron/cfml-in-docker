@@ -1,9 +1,13 @@
 {
+    "dependencies":{
+        "cfwheels":"^2.2.0"
+    },
     "devDependencies":{
         "testbox":"^4.2.1+400"
     },
     "installPaths":{
-        "testbox":"vendor/testbox/"
+        "testbox":"vendor/testbox/",
+        "cfwheels":"vendor/cfwheels/"
     },
     "testbox":{
         "runner":"http://localhost:8888/test/runTests.cfm"

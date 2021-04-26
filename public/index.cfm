@@ -1,1 +1,1 @@
-<cfoutput>#CGI.path_info#</cfoutput>
+<cfinclude "/wheels/index.cfm">

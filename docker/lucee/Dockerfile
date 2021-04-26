@@ -21,6 +21,10 @@ COPY ./box.json /var/www/box.json
 RUN mkdir -p /var/www/vendor
 RUN box install
 
+COPY ./cfconfig.json /var/www/cfconfig.json
+RUN box install commandbox-cfconfig
+RUN box cfconfig import to=/opt/lucee/web from=/var/www/cfconfig.json
+
 RUN echo ${LUCEE_PASSWORD} > /opt/lucee/server/lucee-server/context/password.txt
 
 EXPOSE 8888
