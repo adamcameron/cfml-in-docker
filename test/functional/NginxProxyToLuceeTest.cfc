@@ -29,7 +29,7 @@ component extends=testbox.system.BaseSpec {
             it("passes URL path_info to Lucee correctly", () => {
                 testPathInfo = "/additional/path/info/"
 
-                http url="http://cfml-in-docker.frontend/index.cfm#testPathInfo#" result="response";
+                http url="http://cfml-in-docker.frontend/test/index.cfm#testPathInfo#" result="response";
 
                 expect(response.status_code).toBe(200, "HTTP status code incorrect")
                 expect(response.fileContent.trim()).toBe(testPathInfo, "PATH_INFO value was incorrect")
