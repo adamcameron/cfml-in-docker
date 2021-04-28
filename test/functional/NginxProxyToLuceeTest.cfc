@@ -36,9 +36,8 @@ component extends=testbox.system.BaseSpec {
             })
 
             it("handles .cfm 404s via Lucee", () => {
-                testPathInfo = "/additional/path/info/"
-
                 http url="http://cfml-in-docker.frontend/notValid.cfm" result="response";
+
                 expect(response.status_code).toBe(404, "HTTP status code incorrect")
                 expect(response.fileContent).toInclude("lucee")
             })
