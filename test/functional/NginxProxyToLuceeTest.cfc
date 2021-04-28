@@ -34,6 +34,14 @@ component extends=testbox.system.BaseSpec {
                 expect(response.status_code).toBe(200, "HTTP status code incorrect")
                 expect(response.fileContent.trim()).toBe(testPathInfo, "PATH_INFO value was incorrect")
             })
+
+            it("handles .cfm 404s via Lucee", () => {
+                testPathInfo = "/additional/path/info/"
+
+                http url="http://cfml-in-docker.frontend/notValid.cfm" result="response";
+                expect(response.status_code).toBe(404, "HTTP status code incorrect")
+                expect(response.fileContent).toInclude("lucee")
+            })
         })
     }
 }
