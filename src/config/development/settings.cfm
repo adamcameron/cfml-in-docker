@@ -4,4 +4,6 @@
 
 // Example:
 // set(dataSourceName="devDB");
+
+set(showDebugInformation=true)
 </cfscript>

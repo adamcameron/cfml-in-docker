@@ -9,6 +9,8 @@
 // set(dataSourceUserName="");
 // set(dataSourcePassword="");
 
+set(dataSourceName="cfmlInDocker")
+
 srcPrefix = "../src"
 
 set(eventPath = "#srcPrefix#/events")
