@@ -43,10 +43,11 @@ component extends=testbox.system.BaseSpec {
             })
 
             it("passes directory URLs to Lucee", () => {
-                http url="http://cfml-in-docker.frontend/testroute/debug/" result="response";
+                testSlug = "/testroute/debug/"
+                http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent.trim()).toBe("/testroute/debug/")
+                expect(response.fileContent).toInclude("EXPECT [#testSlug#]")
             })
         })
     }
