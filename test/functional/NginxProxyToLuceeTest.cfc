@@ -5,15 +5,15 @@ component extends=testbox.system.BaseSpec {
             it("proxies a CFM request to Lucee", () => {
                 http url="http://cfml-in-docker.frontend/gdayWorld.cfm" result="response";
 
-                expect(response.status_code).toBe( 200, "HTTP status code incorrect")
-                expect(response.fileContent.trim()).toBe( "G'day world!", "Response body incorrect")
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
+                expect(response.fileContent.trim()).toBe("G'day world!", "Response body incorrect")
             })
 
             it("passes query values to Lucee", () => {
                 http url="http://cfml-in-docker.frontend/queryTest.cfm?testParam=expectedValue" result="response";
 
-                expect(response.status_code).toBe( 200, "HTTP status code incorrect")
-                expect(response.fileContent.trim()).toBe( "expectedValue", "Query parameter value was incorrect")
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
+                expect(response.fileContent.trim()).toBe("expectedValue", "Query parameter value was incorrect")
             })
 
             it("passes the upstream remote address to Lucee", () => {
@@ -31,15 +31,22 @@ component extends=testbox.system.BaseSpec {
 
                 http url="http://cfml-in-docker.frontend/test/index.cfm#testPathInfo#" result="response";
 
-                expect(response.status_code).toBe(200, "HTTP status code incorrect")
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
                 expect(response.fileContent.trim()).toBe(testPathInfo, "PATH_INFO value was incorrect")
             })
 
             it("handles .cfm 404s via Lucee", () => {
                 http url="http://cfml-in-docker.frontend/notValid.cfm" result="response";
 
-                expect(response.status_code).toBe(404, "HTTP status code incorrect")
+                expect(response.status_code).toBe(404, "Expected to receive a 404")
                 expect(response.fileContent).toInclude("lucee")
+            })
+
+            it("passes directory URLs to Lucee", () => {
+                http url="http://cfml-in-docker.frontend/testroute/debug/" result="response";
+
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
+                expect(response.fileContent.trim()).toBe("/testroute/debug/")
             })
         })
     }
