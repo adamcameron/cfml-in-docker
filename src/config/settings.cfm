@@ -26,4 +26,8 @@ set(webPath = "")
 set(imagePath = "images")
 set(javascriptPath = "javascripts")
 set(stylesheetPath = "stylesheets")
+
+set(wheelsComponentPath = "cfmlInDocker.wheels")
+
+//set(URLRewriting="On")
 </cfscript>
