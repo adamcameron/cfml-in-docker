@@ -29,5 +29,6 @@ set(stylesheetPath = "stylesheets")
 
 set(wheelsComponentPath = "cfmlInDocker.wheels")
 
-//set(URLRewriting="On")
+set(URLRewriting="On")
+set(rewriteFile="index.cfm")
 </cfscript>
