@@ -1,1 +1,1 @@
-<cfoutput>Expected test response [#CGI.script_name#]</cfoutput>
+<cfoutput>Expected test response: [#CGI.script_name#]</cfoutput>

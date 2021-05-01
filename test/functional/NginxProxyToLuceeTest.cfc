@@ -11,11 +11,12 @@ component extends=testbox.system.BaseSpec {
 
             it("passes query values to Lucee", () => {
                 expectedValue = "expectedValue"
+                testUrl = "http://cfml-in-docker.frontend/non-wheels-tests/queryTest.cfm?testParam=#expectedValue#"
 
-                http url="http://cfml-in-docker.frontend/non-wheels-tests/queryTest.cfm?testParam=#expectedValue#" result="response";
+                http url=testUrl result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent.trim()).toBe("Expected query param value: [#expectedValue#]", "Query parameter value was incorrect")
+                expect(response.fileContent.trim()).toInclude("Expected query param value: [#expectedValue#]", "Query parameter value was incorrect (URL: #testUrl#)")
             })
 
             it("passes the upstream remote address to Lucee", () => {
@@ -50,7 +51,7 @@ component extends=testbox.system.BaseSpec {
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent).toBe("Expected test response: [#testSlug#index.cfm]")
+                expect(response.fileContent).toInclude("Expected test response: [/public#testSlug#index.cfm]")
             })
         })
 
@@ -60,7 +61,7 @@ component extends=testbox.system.BaseSpec {
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent).toInclude("Expected test response: [#testSlug#]")
+                expect(response.fileContent).toInclude("Expected test response: [/public/index.cfm][#testSlug#]")
             })
 
             it("passes directory URLs to CFWheels to handle", () => {
@@ -68,7 +69,17 @@ component extends=testbox.system.BaseSpec {
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent).toInclude("Expected test response: [#testSlug#index.cfm]")
+                expect(response.fileContent).toInclude("Expected test response: [/public/index.cfm][#testSlug#]")
+            })
+
+            it("passes query values on URLs served by CFWheels", () => {
+                expectedValue = "expectedValue"
+                testUrl = "http://cfml-in-docker.frontend/wheels-tests/query/?testParam=#expectedValue#"
+
+                http url=testUrl result="response";
+
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
+                expect(response.fileContent.trim()).toInclude("Expected query param value: [#expectedValue#]", "Query parameter value was incorrect (URL: #testUrl#)")
             })
         })
     }
