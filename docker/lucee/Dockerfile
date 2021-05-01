@@ -9,7 +9,7 @@ COPY ./root_home/.bashrc /root/.bashrc
 COPY ./root_home/.vimrc /root/.vimrc
 COPY ./root_home/.gitconfig /root/.gitconfig
 COPY ./.ssh /root/.ssh
-COPY ./workspace.code-workspace /root/workspace.code-workspace
+COPY ./root_home/cfml-in-wheels.code-workspace /root/cfml-in-wheels.code-workspace
 RUN chmod 600 /root/.ssh/id_ed25519
 COPY ./web.xml /usr/local/tomcat/conf/web.xml
 

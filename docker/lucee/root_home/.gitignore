@@ -1,4 +1,2 @@
 **
-!.gitignore
-!.bashrc
-!.vimrc
+.bash_history
