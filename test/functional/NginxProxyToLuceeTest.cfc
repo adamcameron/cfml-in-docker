@@ -31,7 +31,8 @@ component extends=testbox.system.BaseSpec {
             it("passes URL path_info to Lucee correctly", () => {
                 testPathInfo = "/additional/path/info/"
 
-                http url="http://cfml-in-docker.frontend/non-wheels-tests/index.cfm#testPathInfo#" result="response";
+                // will require a specific mapping in web.xml for this to work
+                http url="http://cfml-in-docker.frontend/non-wheels-tests/pathInfoTest.cfm#testPathInfo#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
                 expect(response.fileContent.trim()).toBe("Expected PATH_INFO: [#testPathInfo#]", "PATH_INFO value was incorrect")
@@ -54,8 +55,15 @@ component extends=testbox.system.BaseSpec {
         })
 
         describe("Testing proxying to URLs served by CFWheels", () => {
+            it("handles PATH_INFO correctly", () => {
+                testSlug = "/wheels-tests/path-info/"
+                http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
-            it("passes directory URLs to Lucee", () => {
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
+                expect(response.fileContent).toInclude("Expected test response: [#testSlug#]")
+            })
+
+            it("passes directory URLs to CFWheels to handle", () => {
                 testSlug = "/wheels-tests/sub-dir/"
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
