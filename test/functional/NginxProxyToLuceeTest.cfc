@@ -10,13 +10,16 @@ component extends=testbox.system.BaseSpec {
             })
 
             it("passes query values to Lucee", () => {
-                expectedValue = "expectedValue"
-                testUrl = "http://cfml-in-docker.frontend/non-wheels-tests/queryTest.cfm?testParam=#expectedValue#"
+                expectedParamValue = "expectedValue"
+                testUrl = "http://cfml-in-docker.frontend/non-wheels-tests/queryTest.cfm?testParam=#expectedParamValue#"
 
                 http url=testUrl result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent.trim()).toInclude("Expected query param value: [#expectedValue#]", "Query parameter value was incorrect (URL: #testUrl#)")
+                expect(response.fileContent).toInclude(
+                    "Expected query param value: [#expectedParamValue#]",
+                    "Query parameter value was incorrect (URL: #testUrl#)"
+                )
             })
 
             it("passes the upstream remote address to Lucee", () => {
@@ -53,6 +56,25 @@ component extends=testbox.system.BaseSpec {
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
                 expect(response.fileContent).toInclude("Expected test response: [/public#testSlug#index.cfm]")
             })
+
+            it("passes path_info and query parameters to Lucee when both are present", () => {
+                testPathInfo = "/additional/path/info/"
+                expectedParamValue = "expectedValue"
+                testUrl = "http://cfml-in-docker.frontend/non-wheels-tests/pathInfoTest.cfm#testPathInfo#?testParam=#expectedParamValue#"
+
+                // will require a specific mapping in web.xml for this to work
+                http url=testUrl result="response";
+
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
+                expect(response.fileContent).toInclude(
+                    "Expected PATH_INFO: [#testPathInfo#]",
+                    "PATH_INFO value was incorrect (URL: #testUrl#)"
+                )
+                expect(response.fileContent).toInclude(
+                    "Expected query param value: [#expectedParamValue#]",
+                    "Query parameter value was incorrect (URL: #testUrl#)"
+                )
+            })
         })
 
         describe("Testing proxying to URLs served by CFWheels", () => {
@@ -73,13 +95,36 @@ component extends=testbox.system.BaseSpec {
             })
 
             it("passes query values on URLs served by CFWheels", () => {
-                expectedValue = "expectedValue"
-                testUrl = "http://cfml-in-docker.frontend/wheels-tests/query/?testParam=#expectedValue#"
+                testSlug = "/wheels-tests/path-info/"
+                expectedParamValue = "expectedValue"
+                testUrl = "http://cfml-in-docker.frontend/#testSlug#?testParam=#expectedParamValue#"
 
                 http url=testUrl result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent.trim()).toInclude("Expected query param value: [#expectedValue#]", "Query parameter value was incorrect (URL: #testUrl#)")
+                expect(response.fileContent).toInclude(
+                    "Expected query param value: [#expectedParamValue#]",
+                    "Query parameter value was incorrect (URL: #testUrl#)"
+                )
+            })
+
+            it("passes path_info and query parameters on URLs served by CFWheels", () => {
+                testSlug = "/wheels-tests/path-info/"
+                expectedParamValue = "expectedValue"
+                testUrl = "http://cfml-in-docker.frontend/#testSlug#?testParam=#expectedParamValue#"
+
+                // will require a specific mapping in web.xml for this to work
+                http url=testUrl result="response";
+
+                expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
+                expect(response.fileContent).toInclude(
+                    "Expected test response: [/public/index.cfm][#testSlug#]",
+                    "PATH_INFO value was incorrect (URL: #testUrl#)"
+                )
+                expect(response.fileContent).toInclude(
+                    "Expected query param value: [#expectedParamValue#]",
+                    "Query parameter value was incorrect (URL: #testUrl#)"
+                )
             })
         })
     }
