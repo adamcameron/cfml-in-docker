@@ -1,15 +1,15 @@
 component extends="app.tests.Test" {
 
 	function testExample() {
-		result = processRequest(
+		response = processRequest(
 			params = {
-				controller = "wheels",
-				action = "wheels"
+				controller = "testroute",
+				action = "debug"
 			},
 			returnAs = "struct"
-		);
+		)
 
-		assert("result.status eq 200");
-		assert("result.body contains 'EXPECT [/wheels/tests/app]'");
+		assert(response.status eq 200)
+		assert(response.body contains 'EXPECT [/wheels/tests/app]')
 	}
 }

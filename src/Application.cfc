@@ -14,10 +14,19 @@ component {
             characterEncoding = "UTF-8"
         }
     }
-    thisDirectory = getDirectoryFromPath(getCurrentTemplatePath())
-    this.mappings["/public/wheels"] =  getCanonicalPath("#thisDirectory#wheels")
-    this.mappings["/public/tests"] = getCanonicalPath("#thisDirectory#../tests")
-    this.mappings["/app/tests"] = getCanonicalPath("#thisDirectory#../tests")
+
+    this.localMode = "modern"
+
+    this.setMappings()
 
     include "/wheels/functions.cfm";
+
+    public function setMappings(){
+        writeOutput("hi from base")
+
+        thisDirectory = getDirectoryFromPath(getCurrentTemplatePath())
+        this.mappings["/public/wheels"] =  getCanonicalPath("#thisDirectory#wheels")
+        this.mappings["/public/tests"] = getCanonicalPath("#thisDirectory#../tests")
+        this.mappings["/app/tests"] = getCanonicalPath("#thisDirectory#../tests")
+    }
 }

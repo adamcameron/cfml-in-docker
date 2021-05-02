@@ -3,7 +3,7 @@ component extends=testbox.system.BaseSpec {
     function run() {
         describe("Tests Nginx proxies CFML requests to Lucee", () => {
             it("proxies a CFM request to Lucee", () => {
-                http url="http://cfml-in-docker.frontend/non-wheels-tests/gdayWorld.cfm" result="response";
+                http url="http://cfml-in-docker.frontend/nonWheelsTests/gdayWorld.cfm" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
                 expect(response.fileContent.trim()).toBe("G'day world!", "Response body incorrect")
@@ -11,7 +11,7 @@ component extends=testbox.system.BaseSpec {
 
             it("passes query values to Lucee", () => {
                 expectedParamValue = "expectedValue"
-                testUrl = "http://cfml-in-docker.frontend/non-wheels-tests/queryTest.cfm?testParam=#expectedParamValue#"
+                testUrl = "http://cfml-in-docker.frontend/nonWheelsTests/queryTest.cfm?testParam=#expectedParamValue#"
 
                 http url=testUrl result="response";
 
@@ -23,10 +23,10 @@ component extends=testbox.system.BaseSpec {
             })
 
             it("passes the upstream remote address to Lucee", () => {
-                http url="http://cfml-in-docker.lucee:8888/public/non-wheels-tests/remoteAddrTest.cfm" result="response";
+                http url="http://cfml-in-docker.lucee:8888/public/nonWheelsTests/remoteAddrTest.cfm" result="response";
                 expectedRemoteAddr = response.fileContent
 
-                http url="http://cfml-in-docker.frontend/non-wheels-tests/remoteAddrTest.cfm" result="testResponse";
+                http url="http://cfml-in-docker.frontend/nonWheelsTests/remoteAddrTest.cfm" result="testResponse";
                 actualRemoteAddr = testResponse.fileContent
 
                 expect(actualRemoteAddr).toBe(expectedRemoteAddr, "Remote address was incorrect")
@@ -36,21 +36,21 @@ component extends=testbox.system.BaseSpec {
                 testPathInfo = "/additional/path/info/"
 
                 // will require a specific mapping in web.xml for this to work
-                http url="http://cfml-in-docker.frontend/non-wheels-tests/pathInfoTest.cfm#testPathInfo#" result="response";
+                http url="http://cfml-in-docker.frontend/nonWheelsTests/pathInfoTest.cfm#testPathInfo#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
                 expect(response.fileContent.trim()).toBe("Expected PATH_INFO: [#testPathInfo#]", "PATH_INFO value was incorrect")
             })
 
             it("handles .cfm 404s via Lucee", () => {
-                http url="http://cfml-in-docker.frontend/non-wheels-tests/notValid.cfm" result="response";
+                http url="http://cfml-in-docker.frontend/nonWheelsTests/notValid.cfm" result="response";
 
                 expect(response.status_code).toBe(404, "Expected to receive a 404")
                 expect(response.fileContent).toInclude("lucee")
             })
 
             it("passes directory URLs to Lucee", () => {
-                testSlug = "/non-wheels-tests/sub-dir/"
+                testSlug = "/nonWheelsTests/sub-dir/"
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
@@ -60,7 +60,7 @@ component extends=testbox.system.BaseSpec {
             it("passes path_info and query parameters to Lucee when both are present", () => {
                 testPathInfo = "/additional/path/info/"
                 expectedParamValue = "expectedValue"
-                testUrl = "http://cfml-in-docker.frontend/non-wheels-tests/pathInfoTest.cfm#testPathInfo#?testParam=#expectedParamValue#"
+                testUrl = "http://cfml-in-docker.frontend/nonWheelsTests/pathInfoTest.cfm#testPathInfo#?testParam=#expectedParamValue#"
 
                 // will require a specific mapping in web.xml for this to work
                 http url=testUrl result="response";
