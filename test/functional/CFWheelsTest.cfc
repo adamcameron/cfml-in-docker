@@ -15,6 +15,13 @@ component extends=testbox.system.BaseSpec {
                 expect(response.status_code).toBe(200, "HTTP status code incorrect")
                 expect(response.fileContent).toInclude("Test Results")
             })
+
+            it("serves the Docs page", () => {
+                http url="http://cfml-in-docker.frontend/wheels/docs" result="response";
+
+                expect(response.status_code).toBe(200, "HTTP status code incorrect")
+                expect(response.fileContent).toInclude("<title>Docs | CFWheels</title>")
+            })
         })
     }
 }

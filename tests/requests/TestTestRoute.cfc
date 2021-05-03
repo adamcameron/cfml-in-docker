@@ -1,6 +1,6 @@
 component extends="app.tests.Test" {
 
-	function testExample() {
+	function testBasicRoutingWorks() {
 		variables.response = processRequest(
 			params = {
 				controller = "testroute",
