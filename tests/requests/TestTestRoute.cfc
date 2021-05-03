@@ -1,15 +1,18 @@
 component extends="app.tests.Test" {
 
 	function testExample() {
-		response = processRequest(
+		variables.response = processRequest(
 			params = {
 				controller = "testroute",
 				action = "debug"
 			},
 			returnAs = "struct"
 		)
-
-		assert(response.status eq 200)
-		assert(response.body contains 'EXPECT [/wheels/tests/app]')
+		try {
+			assert("variables.response.status eq 200")
+			assert("variables.response.body contains 'EXPECTED_CONTENT'")
+		} finally {
+			structDelete(variables, "response")
+		}
 	}
 }

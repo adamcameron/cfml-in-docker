@@ -17,16 +17,10 @@ component {
 
     this.localMode = "modern"
 
-    this.setMappings()
+    thisDirectory = getDirectoryFromPath(getCurrentTemplatePath())
+    this.mappings["/public/wheels"] =  getCanonicalPath("#thisDirectory#wheels")
+    this.mappings["/public/tests"] = getCanonicalPath("#thisDirectory#../tests")
+    this.mappings["/app/tests"] = getCanonicalPath("#thisDirectory#../tests")
 
     include "/wheels/functions.cfm";
-
-    public function setMappings(){
-        writeOutput("hi from base")
-
-        thisDirectory = getDirectoryFromPath(getCurrentTemplatePath())
-        this.mappings["/public/wheels"] =  getCanonicalPath("#thisDirectory#wheels")
-        this.mappings["/public/tests"] = getCanonicalPath("#thisDirectory#../tests")
-        this.mappings["/app/tests"] = getCanonicalPath("#thisDirectory#../tests")
-    }
 }
