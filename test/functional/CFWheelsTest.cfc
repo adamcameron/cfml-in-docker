@@ -9,7 +9,7 @@ component extends=testbox.system.BaseSpec {
                 expect(response.fileContent).toInclude("<title>CFWheels</title>", "Response body incorrect")
             })
 
-            it("can run the Wheels tests", () => {
+            it("can run the CFWheels tests", () => {
                 http url="http://cfml-in-docker.frontend/index.cfm?controller=wheels&action=wheels&view=tests&type=app" result="response";
 
                 expect(response.status_code).toBe(200, "HTTP status code incorrect")
