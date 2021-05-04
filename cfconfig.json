@@ -4,6 +4,11 @@
             "inspectTemplate":"once",
             "physical":"/var/www/src",
             "primary":"physical"
+        },
+        "/wheels":{
+            "inspectTemplate":"once",
+            "physical":"/var/www/src/wheels",
+            "primary":"physical"
         }
     }
 }
