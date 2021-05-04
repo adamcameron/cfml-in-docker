@@ -26,5 +26,7 @@ component {
     this.mappings["/app/models"] = getCanonicalPath("#thisDirectory#models")
     this.mappings["/app/wheels"] = getCanonicalPath("#thisDirectory#wheels")
 
+    this.mappings["/wheels"] = getCanonicalPath("#thisDirectory#wheels")
+
     include "/wheels/functions.cfm";
 }
