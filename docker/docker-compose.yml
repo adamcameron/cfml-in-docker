@@ -25,7 +25,7 @@ services:
         environment:
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
-            - ../var/log/tomcat:/usr/local/tomcat/log
+            - ../var/log/tomcat:/usr/local/tomcat/logs
             - ../var/log/lucee:/opt/lucee/web/logs
             - ./lucee/root_home/.bash_history:/root/.bash_history
         ports:
