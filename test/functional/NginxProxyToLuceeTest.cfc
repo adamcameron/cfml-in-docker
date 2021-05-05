@@ -23,7 +23,7 @@ component extends=testbox.system.BaseSpec {
             })
 
             it("passes the upstream remote address to Lucee", () => {
-                http url="http://cfml-in-docker.lucee:8888/public/nonWheelsTests/remoteAddrTest.cfm" result="response";
+                http url="http://cfml-in-docker.lucee:8888/nonWheelsTests/remoteAddrTest.cfm" result="response";
                 expectedRemoteAddr = response.fileContent
 
                 http url="http://cfml-in-docker.frontend/nonWheelsTests/remoteAddrTest.cfm" result="testResponse";
@@ -54,7 +54,7 @@ component extends=testbox.system.BaseSpec {
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent).toInclude("Expected test response: [/public#testSlug#index.cfm]")
+                expect(response.fileContent).toInclude("Expected test response: [#testSlug#index.cfm]")
             })
 
             it("passes path_info and query parameters to Lucee when both are present", () => {
@@ -83,7 +83,7 @@ component extends=testbox.system.BaseSpec {
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent).toInclude("Expected test response: [/public/index.cfm][#testSlug#]")
+                expect(response.fileContent).toInclude("Expected test response: [/index.cfm][#testSlug#]")
             })
 
             it("passes directory URLs to CFWheels to handle", () => {
@@ -91,7 +91,7 @@ component extends=testbox.system.BaseSpec {
                 http url="http://cfml-in-docker.frontend#testSlug#" result="response";
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
-                expect(response.fileContent).toInclude("Expected test response: [/public/index.cfm][#testSlug#]")
+                expect(response.fileContent).toInclude("Expected test response: [/index.cfm][#testSlug#]")
             })
 
             it("passes query values on URLs served by CFWheels", () => {
@@ -118,7 +118,7 @@ component extends=testbox.system.BaseSpec {
 
                 expect(response.status_code).toBe(200, "Expected to receive a 200-OK")
                 expect(response.fileContent).toInclude(
-                    "Expected test response: [/public/index.cfm][#testSlug#]",
+                    "Expected test response: [/index.cfm][#testSlug#]",
                     "PATH_INFO value was incorrect (URL: #testUrl#)"
                 )
                 expect(response.fileContent).toInclude(
