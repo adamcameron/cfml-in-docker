@@ -4644,8 +4644,8 @@
         <url-pattern>/index.cfc/*</url-pattern>
         <url-pattern>/index.cfml/*</url-pattern>
 
-        <url-pattern>/public/index.cfm/*</url-pattern>
-        <url-pattern>/public/nonWheelsTests/pathInfoTest.cfm/*</url-pattern><!-- for testing that PATH_INFO is handled properly-->
+        <url-pattern>/index.cfm/*</url-pattern>
+        <url-pattern>/nonWheelsTests/pathInfoTest.cfm/*</url-pattern><!-- for testing that PATH_INFO is handled properly-->
     </servlet-mapping>
 
     <servlet-mapping>
