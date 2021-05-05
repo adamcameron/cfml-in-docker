@@ -1,4 +1,4 @@
-component {
+component extends=cfmlInDocker.Application {
 
     this.mappings = {
         "/cfmlInDocker/test" = expandPath("/test"),
@@ -20,4 +20,8 @@ component {
         }
     }
     this.datasource = "cfmlInDocker"
+
+    function onRequestEnd() {
+        // just block CFWheel's one
+    }
 }
