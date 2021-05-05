@@ -97,7 +97,7 @@ component extends=testbox.system.BaseSpec {
             it("passes query values on URLs served by CFWheels", () => {
                 testSlug = "/wheels-tests/path-info/"
                 expectedParamValue = "expectedValue"
-                testUrl = "http://cfml-in-docker.frontend/#testSlug#?testParam=#expectedParamValue#"
+                testUrl = "http://cfml-in-docker.frontend#testSlug#?testParam=#expectedParamValue#"
 
                 http url=testUrl result="response";
 
@@ -111,7 +111,7 @@ component extends=testbox.system.BaseSpec {
             it("passes path_info and query parameters on URLs served by CFWheels", () => {
                 testSlug = "/wheels-tests/path-info/"
                 expectedParamValue = "expectedValue"
-                testUrl = "http://cfml-in-docker.frontend/#testSlug#?testParam=#expectedParamValue#"
+                testUrl = "http://cfml-in-docker.frontend#testSlug#?testParam=#expectedParamValue#"
 
                 // will require a specific mapping in web.xml for this to work
                 http url=testUrl result="response";

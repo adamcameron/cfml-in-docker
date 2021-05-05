@@ -18,13 +18,21 @@ component {
     this.localMode = "modern"
 
     thisDirectory = getDirectoryFromPath(getCurrentTemplatePath())
+
     this.mappings["/public/wheels"] =  getCanonicalPath("#thisDirectory#wheels")
-    this.mappings["/public/tests"] = getCanonicalPath("#thisDirectory#../tests")
-    this.mappings["/app/tests"] = getCanonicalPath("#thisDirectory#../tests")
+    this.mappings["/app/wheels"] = getCanonicalPath("#thisDirectory#wheels")
 
     this.mappings["/app/controllers"] = getCanonicalPath("#thisDirectory#controllers")
     this.mappings["/app/models"] = getCanonicalPath("#thisDirectory#models")
-    this.mappings["/app/wheels"] = getCanonicalPath("#thisDirectory#wheels")
+    this.mappings["/app/events"] = getCanonicalPath("#thisDirectory#events")
+    this.mappings["/app/files"] = getCanonicalPath("#thisDirectory#files")
+    this.mappings["/app/plugins"] = getCanonicalPath("#thisDirectory#plugins")
+    this.mappings["/app/views"] = getCanonicalPath("#thisDirectory#views")
+
+    testDirectory = getCanonicalPath("#thisDirectory#../tests")
+    this.mappings["/public/tests"] = testDirectory
+    this.mappings["/app/tests"] = testDirectory
+    this.mappings["/tests"] = testDirectory
 
     include "/wheels/functions.cfm";
 }

@@ -20,7 +20,7 @@ set(modelComponentPath = "#srcPrefix#/models")
 set(pluginPath = "#srcPrefix#/plugins")
 set(pluginComponentPath = "#srcPrefix#/plugins")
 set(viewPath = "#srcPrefix#/views")
-set(controllerPath = "#srcPrefix#/controllers")
+set(controllerPath = "/app/controllers")
 
 set(webPath = "")
 set(imagePath = "images")
