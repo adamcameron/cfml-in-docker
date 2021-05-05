@@ -1,10 +1,8 @@
 component extends=cfmlInDocker.Application {
 
     currentDir =getDirectoryFromPath(getCurrentTemplatePath())
-    this.mappings = {
-        "/cfmlInDocker/test" = currentDir,
-        "/testbox" = getCanonicalPath("#currentDir#../vendor/testbox")
-    }
+    this.mappings["/cfmlInDocker/test"] = currentDir
+    this.mappings["/testbox"] = getCanonicalPath("#currentDir#../vendor/testbox")
 
     this.localmode = "modern"
 

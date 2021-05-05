@@ -11,15 +11,13 @@
 
 set(dataSourceName="cfmlInDocker")
 
-srcPrefix = "../src"
-
-set(eventPath = "#srcPrefix#/events")
-set(filePath = "#srcPrefix#/files")
-set(modelPath = "#srcPrefix#/models")
-set(modelComponentPath = "#srcPrefix#/models")
-set(pluginPath = "#srcPrefix#/plugins")
-set(pluginComponentPath = "#srcPrefix#/plugins")
-set(viewPath = "#srcPrefix#/views")
+set(eventPath = "../src/events")
+set(filePath = "../src/files")
+set(modelPath = "../src/models")
+set(modelComponentPath = "../src/models")
+set(pluginPath = "../src/plugins")
+set(pluginComponentPath = "../src/plugins")
+set(viewPath = "../src/views")
 set(controllerPath = "/app/controllers")
 
 set(webPath = "")
