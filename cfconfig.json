@@ -5,6 +5,11 @@
             "physical":"/var/www/src",
             "primary":"physical"
         },
+        "/test":{
+            "inspectTemplate":"once",
+            "physical":"/var/www/test",
+            "primary":"physical"
+        },
         "/wheels":{
             "inspectTemplate":"once",
             "physical":"/var/www/src/wheels",
