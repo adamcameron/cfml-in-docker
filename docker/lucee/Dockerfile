@@ -12,6 +12,7 @@ COPY ./.ssh /root/.ssh
 COPY ./root_home/cfml-in-lucee.code-workspace /root/cfml-in-lucee.code-workspace
 RUN chmod 600 /root/.ssh/id_ed25519
 COPY ./web.xml /usr/local/tomcat/conf/web.xml
+COPY ./server.xml /usr/local/tomcat/conf/web.xml
 
 WORKDIR  /var/www
 
