@@ -3,5 +3,5 @@
 /vendor/
 /src/wheels/
 /.history/
-workspace.code-workspace
+CfmlInDockerOnHost.code-workspace
 /.vscode/
