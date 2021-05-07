@@ -1,7 +1,7 @@
 component extends=testbox.system.BaseSpec {
 
     function run() {
-        describe("Tests Lucee's config has been tweaked'", () => {
+        describe("Tests Lucee's config has been tweaked", () => {
             it("has 'Local scope mode' set to 'modern'", () => {
             	testVariable = "value"
 
