@@ -23,7 +23,7 @@ services:
             args:
                 - LUCEE_PASSWORD=${LUCEE_PASSWORD}
         environment:
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MARIADB_PASSWORD=${MARIADB_PASSWORD}
         volumes:
             - ../var/log/tomcat:/usr/local/tomcat/logs
             - ../var/log/lucee:/opt/lucee/web/logs
@@ -41,10 +41,10 @@ services:
         build:
             context: ./mariadb
         environment:
-            - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+            - MARIADB_DATABASE=${MARIADB_DATABASE}
+            - MARIADB_USER=${MARIADB_USER}
+            - MARIADB_PASSWORD=${MARIADB_PASSWORD}
         ports:
             - "3306:3306"
         volumes:

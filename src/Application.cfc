@@ -8,7 +8,7 @@ component {
         port = 3306,
         database = "cfmlindocker",
         username = "cfmlindocker",
-        password = server.system.environment.MYSQL_PASSWORD,
+        password = server.system.environment.MARIADB_PASSWORD,
         custom = {
             useUnicode = true,
             characterEncoding = "UTF-8"
