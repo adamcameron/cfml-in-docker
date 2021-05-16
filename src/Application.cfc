@@ -28,7 +28,7 @@ component {
     this.mappings["/app/plugins"] = getCanonicalPath("#thisDirectory#plugins")
     this.mappings["/app/views"] = getCanonicalPath("#thisDirectory#views")
 
-	this.mappings["/models"] = getCanonicalPath("#thisDirectory#models")
+    this.mappings["/models"] = getCanonicalPath("#thisDirectory#models")
 
     testDirectory = getCanonicalPath("#thisDirectory#../tests")
     this.mappings["/public/tests"] = testDirectory
