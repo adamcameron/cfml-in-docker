@@ -18,7 +18,6 @@ component {
     this.localMode = "modern"
 
     thisDirectory = getDirectoryFromPath(getCurrentTemplatePath())
-
     this.mappings["/public/wheels"] =  getCanonicalPath("#thisDirectory#wheels")
     this.mappings["/app/wheels"] = getCanonicalPath("#thisDirectory#wheels")
 
@@ -28,6 +27,8 @@ component {
     this.mappings["/app/files"] = getCanonicalPath("#thisDirectory#files")
     this.mappings["/app/plugins"] = getCanonicalPath("#thisDirectory#plugins")
     this.mappings["/app/views"] = getCanonicalPath("#thisDirectory#views")
+
+	this.mappings["/models"] = getCanonicalPath("#thisDirectory#models")
 
     testDirectory = getCanonicalPath("#thisDirectory#../tests")
     this.mappings["/public/tests"] = testDirectory
