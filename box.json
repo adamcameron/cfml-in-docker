@@ -10,6 +10,6 @@
         "cfwheels":"vendor/cfwheels/"
     },
     "testbox":{
-        "runner":"http://localhost:8888/test/runTests.cfm"
+        "runner":"http://localhost:8888/test/runTests.cfm?reportFormat=TextReporter"
     }
 }
