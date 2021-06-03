@@ -5,6 +5,9 @@ ARG LUCEE_PASSWORD
 RUN apt-get update
 RUN apt-get install vim --yes
 
+#ENV TZ=Pacfic/Auckland
+#RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 COPY ./root_home/.bashrc /root/.bashrc
 COPY ./root_home/.vimrc /root/.vimrc
 COPY ./root_home/.gitconfig /root/.gitconfig
