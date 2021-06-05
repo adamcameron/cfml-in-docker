@@ -23,7 +23,7 @@ component extends=testbox.system.BaseSpec {
 
                     result = model.executeSomeStuff()
 
-                    expect(result).toBe("ExcellentCool")
+                    expect(result).toBe("Excellent Cool")
                 })
             })
 
@@ -36,18 +36,34 @@ component extends=testbox.system.BaseSpec {
 
                     result = model.executeSomeStuff()
 
-                    expect(result).toBe("ExcellentCool")
+                    expect(result).toBe("Excellent Cool")
                 })
 
                 it("mixes-in a subset of functions from a lib", () => {
                     di = new advanced.DependencyInjectionImplementor()
                     model = new advanced.MyModel()
-                    di.wireStuffIn(model, new advanced.MyBrilliantLib(), ["radiateBrilliance"])
+                    di.wireStuffIn(model, new advanced.MyBrilliantLib(), {"radiateBrilliance" = {}})
 
                     result = model.executeSomethingBrilliant()
                     expect(result).toBe("brilliance")
 
                     expect(() => model.failAtDoingItBrilliantly()).toThrow(type="expression")
+                })
+
+                it("remaps function names if the map specifies it", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(
+                        model,
+                        new advanced.MyBrilliantLib(),
+                        {
+                            "radiateBrilliance" = {target="shine"},
+                            "doItBrilliantly" = {}
+                        }
+                    )
+
+                    result = model.performBrilliantThings()
+                    expect(result).toBe("brilliance done brilliantly")
                 })
             })
         })

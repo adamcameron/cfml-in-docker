@@ -1,7 +1,7 @@
 component {
 
     function executeSomeStuff() {
-        return doExcellentThing() & applyCoolness()
+        return doExcellentThing() & " " & applyCoolness()
     }
 
     function executeSomethingBrilliant() {
@@ -10,5 +10,9 @@ component {
 
     function failAtDoingItBrilliantly() {
         return doItBrilliantly()
+    }
+
+    function performBrilliantThings() {
+        return shine() & " " & doItBrilliantly()
     }
 }

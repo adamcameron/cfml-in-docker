@@ -1,5 +1,5 @@
 component {
     function executeSomeStuff() {
-        return doExcellentThing() & applyCoolness()
+        return doExcellentThing() & " " & applyCoolness()
     }
 }
