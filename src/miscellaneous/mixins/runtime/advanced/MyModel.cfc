@@ -23,4 +23,12 @@ component {
     function checkIfItsTheBest(){
         return variables.makeBest()
     }
+
+    function progressStatus(){
+        return variables.startOff() & " " & this.progressToBeLegendary() & " " & variables.complete()
+    }
+
+    function revert() {
+        return variables.revertToNoob()
+    }
 }

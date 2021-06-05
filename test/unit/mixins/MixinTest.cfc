@@ -8,6 +8,7 @@ component extends=testbox.system.BaseSpec {
             describe("Tests compile-time implementation of mix-ins", () => {
                 it("mixes-in the required functions", () => {
                     model = new compileTime.MyModel()
+
                     result = model.executeSomeStuff()
 
                     expect(result).toBe("ExcellentCool")
@@ -45,8 +46,8 @@ component extends=testbox.system.BaseSpec {
                     di.wireStuffIn(model, new advanced.MyBrilliantLib(), {"radiateBrilliance" = {}})
 
                     result = model.executeSomethingBrilliant()
-                    expect(result).toBe("brilliance")
 
+                    expect(result).toBe("brilliance")
                     expect(() => model.failAtDoingItBrilliantly()).toThrow(type="expression")
                 })
 
@@ -94,10 +95,32 @@ component extends=testbox.system.BaseSpec {
                             makeBest = {access="INVALID"}
                         }
                     )
-                    result = model.checkIfItsTheBest()
-                    expect(result).toBe("best")
 
+                    result = model.checkIfItsTheBest()
+
+                    expect(result).toBe("best")
                     expect(() => model.makeBest()).toThrow(type="expression")
+                })
+
+                it("handles subset / renames / modifiers (good/bad)", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(
+                        model,
+                        new advanced.MyUltimateLib(),
+                        {
+                            startAsEpic : {target="startOff"},
+                            progressToBeLegendary: {access="public"},
+                            retireAsMythic : {target="complete", access="PROTECTED"}
+                        }
+                    )
+
+                    result = model.progressStatus()
+
+                    expect(result).toBe("epic legendary mythic")
+                    expect(() => model.startAsEpic()).toThrow(type="expression")
+                    expect(() => model.complete()).toThrow(type="expression")
+                    expect(() => model.revert()).toThrow(type="expression")
                 })
             })
         })
