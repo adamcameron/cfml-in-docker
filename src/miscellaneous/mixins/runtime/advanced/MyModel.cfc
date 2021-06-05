@@ -15,4 +15,8 @@ component {
     function performBrilliantThings() {
         return shine() & " " & doItBrilliantly()
     }
+
+    function executeSomeOtherStuff(){
+        return variables.makeItBetter() & " " & this.makeBest()
+    }
 }

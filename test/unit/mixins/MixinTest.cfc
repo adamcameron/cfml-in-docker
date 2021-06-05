@@ -65,6 +65,24 @@ component extends=testbox.system.BaseSpec {
                     result = model.performBrilliantThings()
                     expect(result).toBe("brilliance done brilliantly")
                 })
+
+                it("handles public/private method access on the mixed-in function", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(
+                        model,
+                        new advanced.MyBestLib(),
+                        {
+                            improveGoodness = {target="makeItBetter"},
+                            makeBest = {access="public"}
+                        }
+                    )
+
+                    result = model.executeSomeOtherStuff()
+                    expect(result).toBe("better best")
+
+                    expect(() => model.makeItBetter()).toThrow(type="expression")
+                })
             })
         })
     }

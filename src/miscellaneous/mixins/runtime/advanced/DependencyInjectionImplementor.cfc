@@ -1,26 +1,37 @@
 component  {
 
     function wireStuffIn(someObject, someMixin, mixinMap) {
-        someObject.__putVariable = putIntoVariables
-
         arguments.keyExists("mixinMap")
             ? mixinUsingMap(someObject, someMixin, mixinMap)
             : mixinUsingMixin(someObject, someMixin)
-
-        structDelete(someObject, "__putVariable")
     }
 
     private function mixinUsingMixin(someObject, someMixin) {
+        someObject.__putVariable = putIntoVariables
         structKeyArray(someMixin).each((methodName) => {
             someObject.__putVariable(someMixin[methodName], methodName)
         })
+        structDelete(someObject, "__putVariable")
     }
 
     private function mixinUsingMap(someObject, someMixin, mixinMap) {
+        someObject.__getVariables = getVariables
+        scopes = {
+            public = someObject,
+            private = someObject.__getVariables()
+        }
+        structDelete(someObject, "__getVariables")
+
         mixinMap.each((sourceMethod, mapping) => {
             targetMethod = mapping.keyExists("target") ? mapping.target : sourceMethod
-            someObject.__putVariable(someMixin[sourceMethod], targetMethod)
+            targetAccess = mapping.keyExists("access") ? mapping.access : "private"
+
+            scopes[targetAccess][targetMethod] = someMixin[sourceMethod]
         })
+    }
+
+    function getVariables(){
+        return variables
     }
 
     function putIntoVariables(value, key){
