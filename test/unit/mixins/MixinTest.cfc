@@ -83,6 +83,22 @@ component extends=testbox.system.BaseSpec {
 
                     expect(() => model.makeItBetter()).toThrow(type="expression")
                 })
+
+                it("ignores access modifiers other than public / private (falling back to private)" , () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(
+                        model,
+                        new advanced.MyBestLib(),
+                        {
+                            makeBest = {access="INVALID"}
+                        }
+                    )
+                    result = model.checkIfItsTheBest()
+                    expect(result).toBe("best")
+
+                    expect(() => model.makeBest()).toThrow(type="expression")
+                })
             })
         })
     }

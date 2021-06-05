@@ -24,7 +24,9 @@ component  {
 
         mixinMap.each((sourceMethod, mapping) => {
             targetMethod = mapping.keyExists("target") ? mapping.target : sourceMethod
-            targetAccess = mapping.keyExists("access") ? mapping.access : "private"
+            requestedAccess = mapping.keyExists("access") ? mapping.access : "private"
+
+            targetAccess = requestedAccess == "public" ? "public" : "private"
 
             scopes[targetAccess][targetMethod] = someMixin[sourceMethod]
         })

@@ -19,4 +19,8 @@ component {
     function executeSomeOtherStuff(){
         return variables.makeItBetter() & " " & this.makeBest()
     }
+
+    function checkIfItsTheBest(){
+        return variables.makeBest()
+    }
 }
