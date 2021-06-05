@@ -14,7 +14,7 @@ component extends=testbox.system.BaseSpec {
                 })
             })
 
-            describe("Tests run-time simple implementation of mix-ins", () => {
+            describe("Tests simple run-time implementation of mix-ins", () => {
                 it("mixes-in the required functions", () => {
                     di = new simple.DependencyInjectionImplementor()
                     model = new simple.MyModel()
@@ -24,6 +24,30 @@ component extends=testbox.system.BaseSpec {
                     result = model.executeSomeStuff()
 
                     expect(result).toBe("ExcellentCool")
+                })
+            })
+
+            describe("Tests advanced run-time implementation of mix-ins", () => {
+                it("mixes-in the required functions using simplest approach", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(model, new advanced.MyExcellentLib())
+                    di.wireStuffIn(model, new advanced.MyCoolLib())
+
+                    result = model.executeSomeStuff()
+
+                    expect(result).toBe("ExcellentCool")
+                })
+
+                it("mixes-in a subset of functions from a lib", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(model, new advanced.MyBrilliantLib(), ["radiateBrilliance"])
+
+                    result = model.executeSomethingBrilliant()
+                    expect(result).toBe("brilliance")
+
+                    expect(() => model.failAtDoingItBrilliantly()).toThrow(type="expression")
                 })
             })
         })
