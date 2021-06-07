@@ -31,7 +31,6 @@ component extends=testbox.system.BaseSpec {
                 sut.$mockMe()
 
                 callLog = sut.$callLog()
-                writeDump(callLog)
                 expect(st.callbackWasCalled).toBeTrue()
                 expect(callLog).toHaveKey("$mockMe")
                 expect(callLog.$mockMe).toHaveLength(1)
