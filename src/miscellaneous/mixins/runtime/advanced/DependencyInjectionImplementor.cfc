@@ -9,7 +9,10 @@ component  {
     private function mixinUsingMixin(someObject, someMixin) {
         someObject.__putVariable = putIntoVariables
         structKeyArray(someMixin).each((methodName) => {
-            someObject.__putVariable(someMixin[methodName], methodName)
+
+            proxy = () => someMixin[methodName](argumentCollection=arguments)
+
+            someObject.__putVariable(proxy, methodName)
         })
         structDelete(someObject, "__putVariable")
     }
@@ -24,11 +27,17 @@ component  {
 
         mixinMap.each((sourceMethod, mapping) => {
             targetMethod = mapping.keyExists("target") ? mapping.target : sourceMethod
-            requestedAccess = mapping.keyExists("access") ? mapping.access : "private"
 
+            requestedAccess = mapping.keyExists("access") ? mapping.access : "private"
             targetAccess = requestedAccess == "public" ? "public" : "private"
 
-            scopes[targetAccess][targetMethod] = someMixin[sourceMethod]
+            bind = mapping.keyExists("bind") && isBoolean(mapping.bind) ? mapping.bind : true
+
+            proxy = bind
+                ? () => someMixin[sourceMethod](argumentCollection=arguments)
+                : someMixin[sourceMethod]
+
+            scopes[targetAccess][targetMethod] = proxy
         })
     }
 

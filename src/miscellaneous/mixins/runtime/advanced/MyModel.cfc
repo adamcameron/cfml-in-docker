@@ -1,5 +1,9 @@
 component {
 
+    function init() {
+        variables.status = true
+    }
+
     function executeSomeStuff() {
         return doExcellentThing() & " " & applyCoolness()
     }
@@ -30,5 +34,9 @@ component {
 
     function revert() {
         return variables.revertToNoob()
+    }
+
+    function getObjects(orderBy="id") {
+        return getObjectsFromStorage(orderBy)
     }
 }

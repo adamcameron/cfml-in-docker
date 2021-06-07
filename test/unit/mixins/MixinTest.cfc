@@ -1,5 +1,6 @@
-import cfmlInDocker.miscellaneous.mixins.*;
-import cfmlInDocker.miscellaneous.mixins.runtime.*;
+import cfmlInDocker.miscellaneous.mixins.*
+import cfmlInDocker.miscellaneous.mixins.runtime.*
+import cfmlInDocker.miscellaneous.mixins.runtime.advanced.Number
 
 component extends=testbox.system.BaseSpec {
 
@@ -121,6 +122,63 @@ component extends=testbox.system.BaseSpec {
                     expect(() => model.startAsEpic()).toThrow(type="expression")
                     expect(() => model.complete()).toThrow(type="expression")
                     expect(() => model.revert()).toThrow(type="expression")
+                })
+
+                it("binds mixed-in methods to their original calling context when using a mixinMap", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(
+                        model,
+                        new advanced.MyRepository(new advanced.MyDao()),
+                        {
+                            getObjectsFromStorage : {}
+                        }
+                    )
+
+                    result = model.getObjects(orderBy="mi")
+
+                    expect(result).toBeArray()
+                    expect(result).toHaveLength(4)
+                    expect(result).toBe([
+                        new Number("rua"),
+                        new Number("tahi"),
+                        new Number("toru"),
+                        new Number("wha")
+                    ])
+                })
+
+                it("binds mixed-in methods to their original calling context by default", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(
+                        model,
+                        new advanced.MyRepository(new advanced.MyDao())
+                    )
+
+                    result = model.getObjects(orderBy="en")
+
+                    expect(result).toBeArray()
+                    expect(result).toHaveLength(4)
+                    expect(result).toBe([
+                        new Number("wha"),
+                        new Number("tahi"),
+                        new Number("toru"),
+                        new Number("rua")
+                    ])
+                })
+
+                it("doesn't bind mixed-in function to their original calling context if bind option is false", () => {
+                    di = new advanced.DependencyInjectionImplementor()
+                    model = new advanced.MyModel()
+                    di.wireStuffIn(
+                        model,
+                        new advanced.MyStatusLib(),
+                        {getStatus = {access="public", bind=false}}
+                    )
+
+                    result = model.getStatus()
+
+                    expect(result).toBeTrue()
                 })
             })
         })
