@@ -135,7 +135,7 @@ component extends=testbox.system.BaseSpec {
                         }
                     )
 
-                    result = model.getObjects(orderBy="mi")
+                    result = model.getObjects(orderBy="maori")
 
                     expect(result).toBeArray()
                     expect(result).toHaveLength(4)
@@ -155,7 +155,7 @@ component extends=testbox.system.BaseSpec {
                         new advanced.MyRepository(new advanced.MyDao())
                     )
 
-                    result = model.getObjects(orderBy="en")
+                    result = model.getObjects(orderBy="english")
 
                     expect(result).toBeArray()
                     expect(result).toHaveLength(4)
