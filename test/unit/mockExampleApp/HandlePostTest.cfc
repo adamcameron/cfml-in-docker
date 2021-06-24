@@ -11,13 +11,35 @@ component extends=BaseSpec {
     function run() {
         describe("Testing handlePost variants", () => {
             it("passes the expected values to the DB", () => {
+                valuesToSave = {english="two", maori="rua"}
+
                 variables.mockedDao.$(method="insert", calllogging=true)
 
-                variables.numberController.handlePost({english="two", maori="rua"})
+                response = variables.numberController.handlePost(valuesToSave)
+
+                expect(response).toBeInstanceOf("cfmlInDocker.nonWheelsTests.mockExampleApp.Response")
+                expect(response.statusCode).toBe(201)
 
                 callLog = variables.mockedDao.$callLog()
+                expect(callLog).toHaveKey("insert")
+                expect(callLog.insert).toHaveLength(1)
+                expect(callLog.insert[1]).toBe(valuesToSave)
+            })
 
-                writeDump(callLog)
+            it("throws expected exception when there are validation issues", () => {
+                variables.mockedDao.$(method="insert", calllogging=true)
+
+                response = variables.numberController.handlePost({})
+
+                expect(response).toBeInstanceOf("cfmlInDocker.nonWheelsTests.mockExampleApp.ClientErrorResponse")
+                expect(response.statusCode).toBe(400)
+                expect(response.errors).toBe([
+                    "english is required",
+                    "maori is required"
+                ])
+
+                callLog = variables.mockedDao.$callLog()
+                expect(callLog).notToHaveKey("insert")
             })
         })
     }
