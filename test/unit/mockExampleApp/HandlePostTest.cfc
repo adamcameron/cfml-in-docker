@@ -15,22 +15,20 @@ component extends=BaseSpec {
 
                 variables.mockedDao.$(method="insert", calllogging=true)
 
-                response = variables.numberController.handlePost(valuesToSave)
-
+                response = variables.numberController.handlePost({english="two", maori="rua"})
                 expect(response).toBeInstanceOf("cfmlInDocker.nonWheelsTests.mockExampleApp.Response")
                 expect(response.statusCode).toBe(201)
 
                 callLog = variables.mockedDao.$callLog()
                 expect(callLog).toHaveKey("insert")
                 expect(callLog.insert).toHaveLength(1)
-                expect(callLog.insert[1]).toBe(valuesToSave)
+                expect(callLog.insert[1]).toBe(["two", "rua"])
             })
 
             it("throws expected exception when there are validation issues", () => {
                 variables.mockedDao.$(method="insert", calllogging=true)
 
                 response = variables.numberController.handlePost({})
-
                 expect(response).toBeInstanceOf("cfmlInDocker.nonWheelsTests.mockExampleApp.ClientErrorResponse")
                 expect(response.statusCode).toBe(400)
                 expect(response.errors).toBe([
@@ -39,7 +37,9 @@ component extends=BaseSpec {
                 ])
 
                 callLog = variables.mockedDao.$callLog()
-                expect(callLog).notToHaveKey("insert")
+                expect(callLog).toHaveKey("insert")
+                expect(callLog.insert).toBeArray()
+                expect(callLog.insert).toBeEmpty()
             })
         })
     }

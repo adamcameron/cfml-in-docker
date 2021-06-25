@@ -21,7 +21,7 @@ component {
         }
 
         if (errors.len()) {
-            throw message="Validation errors" type="ValidationException" extendedInfo=errors;
+            throw(message="Validation errors", type="ValidationException", extendedInfo=serializeJson(errors));
         }
         return {english=arguments.rawValues.english, maori=arguments.rawValues.maori}
     }

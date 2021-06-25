@@ -9,6 +9,9 @@ component extends=Controller {
 
 	function someModel() {
 		someModel = model("SomeModel")
-
 	}
+
+    function getThingsById() {
+        //variables.thing = selectThingById(params.id)
+    }
 }
