@@ -10,7 +10,6 @@ component extends=testbox.system.BaseSpec {
 
                 groupByViaCfml = new GroupByViaCfml()
                 groupedRecords = groupByViaCfml.groupByYearAndMonth(ungroupedRecords)
-writeDump([expectedGroupedRecords, groupedRecords, groupedRecords.stgl[12], groupedRecords.stgl[12].toString()])
                 expect(groupedRecords).toBe(expectedGroupedRecords)
             })
         })

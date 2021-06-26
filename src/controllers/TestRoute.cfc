@@ -11,7 +11,24 @@ component extends=Controller {
 		someModel = model("SomeModel")
 	}
 
-    function getThingsById() {
-        //variables.thing = selectThingById(params.id)
+    function testMyPlugin() {
+        viewVariables = {
+            thing = selectThingById(params.id),
+            version = getVersion(),
+            secret = getSecret()
+        }
+
+        renderView(template="plugin", values=viewVariables)
+    }
+
+    function testMyOtherPlugin() {
+        myOtherPlugin = MyOtherPlugin()
+        viewVariables = {
+            thing = myOtherPlugin.selectThingById(params.id),
+            version = myOtherPlugin.getVersion(),
+            secret = myOtherPlugin.getSecret()
+        }
+
+        renderView(template="plugin", values=viewVariables)
     }
 }

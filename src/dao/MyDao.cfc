@@ -10,8 +10,7 @@ component {
         ]
     )
 
-
     function selectThingById(id){
-        return queryExec("SELECT * FROM things WHERE id = :id", {id=id}, {dbtype="query"})
+        return queryExecute("SELECT * FROM things WHERE id = :id", {id=id}, {dbtype="query"})
     }
 }
