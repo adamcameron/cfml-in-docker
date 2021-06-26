@@ -31,4 +31,13 @@ component extends=Controller {
 
         renderView(template="plugin", values=viewVariables)
     }
+
+    function testColourPlugin() {
+        colourPlugin = ColourPlugin()
+        viewVariables = {
+            colour = colourPlugin.getColourById(params.id)
+        }
+
+        renderView(template="plugin", values=viewVariables)
+    }
 }
