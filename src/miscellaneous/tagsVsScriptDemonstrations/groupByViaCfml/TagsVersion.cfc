@@ -42,4 +42,5 @@
 
         <cfreturn r1.month - r2.month>
     </cffunction>
+
 </cfcomponent>
