@@ -1,7 +1,7 @@
 import testbox.system.BaseSpec
-import cfmlInDocker.models.closureDemonstration.SourceUsingStatements
-import cfmlInDocker.models.closureDemonstration.SourceUsingExpressions
-import cfmlInDocker.models.closureDemonstration.Target
+import cfmlInDocker.miscellaneous.closureDemonstration.SourceUsingStatements
+import cfmlInDocker.miscellaneous.closureDemonstration.SourceUsingExpressions
+import cfmlInDocker.miscellaneous.closureDemonstration.Target
 
 component extends=BaseSpec {
 
