@@ -15,7 +15,7 @@ set(eventPath = "../src/events")
 set(filePath = "../src/files")
 set(modelPath = "/models")
 set(pluginPath = "../src/plugins")
-set(pluginComponentPath = "../src/plugins")
+set(pluginComponentPath = "cfmlInDocker.plugins")
 set(viewPath = "../src/views")
 set(controllerPath = "/app/controllers")
 
@@ -28,4 +28,8 @@ set(wheelsComponentPath = "cfmlInDocker.wheels")
 
 set(URLRewriting="On")
 set(rewriteFile="index.cfm")
+
+set(deletePluginDirectories=FALSE)
+set(showIncompatiblePlugins=true)
+set(enablePluginsComponent=true)
 </cfscript>

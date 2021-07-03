@@ -5,11 +5,16 @@ component {
     }
 
     function getObjectsFromStorage(orderby="id") {
-        orderBy = validateOrderBy(orderBy)
+        orderBy = mapOrderBy(orderBy)
         return dao.getRecords(orderBy).reduce((array=[], record) => array.append(new Number(record.mi)))
     }
 
-    private function validateOrderBy(orderBy) {
-        return orderBy.reFind("^(?:id|mi|en)$") ? orderby : "id"
+    private function mapOrderBy(property) {
+        propertyColumnMap = {
+            "id" = "id",
+            "english" = "en",
+            "maori" = "mi"
+        }
+        return propertyColumnMap.keyExists(property) ? propertyColumnMap[property] : "id"
     }
 }
