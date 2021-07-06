@@ -2,7 +2,7 @@ component extends=testbox.system.BaseSpec {
 
     function run() {
         describe("Testing Tom's function", () => {
-            xit("fulfils the requirement of the puzzle", () => {
+            it("fulfils the requirement of the puzzle", () => {
                 input = {
                     "payment_method_types" = ["card"],
                     "line_items" = [
@@ -47,13 +47,32 @@ component extends=testbox.system.BaseSpec {
 
                 expect(actual).toBe(expected)
             })
+
+            it("handles multiple top-level key/values with simple values", () => {
+                input = {
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two" = {"second" = "rua"},
+                    "three" = {
+                        "third" = {"thrice" = "toru"}
+                    }
+                }
+                expected = {
+                    "[one]" = "tahi",
+                    "[first]" = "tuatahi"
+                }
+
+                actual = flattenStruct(input)
+
+                expect(actual).toBe(expected)
+            })
         })
     }
 
     function flattenStruct(required struct struct) {
         return struct.reduce((flattened, key, value) => {
             if (isSimpleValue(value)) {
-                return {"[#key#]" = value}
+                return flattened.append({"[#key#]" = value})
             }
             return flattened
         }, {})
