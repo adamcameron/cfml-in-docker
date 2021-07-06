@@ -40,9 +40,9 @@ component extends=testbox.system.BaseSpec {
                     }
                 }
                 expected = {
-                    "[one]" = "tahi",
-                    "[two][second]" = "rua",
-                    "[three][third][thrice]" = "toru"
+                    "one" = "tahi",
+                    "two[second]" = "rua",
+                    "three[third][thrice]" = "toru"
                 }
 
                 actual = flattenStruct(input)
@@ -60,10 +60,10 @@ component extends=testbox.system.BaseSpec {
                     }
                 }
                 expected = {
-                    "[one]" = "tahi",
-                    "[first]" = "tuatahi",
-                    "[two][second]" = "rua",
-                    "[three][third][thrice]" = "toru"
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two[second]" = "rua",
+                    "three[third][thrice]" = "toru"
                 }
 
                 actual = flattenStruct(input)
@@ -81,10 +81,10 @@ component extends=testbox.system.BaseSpec {
                     }
                 }
                 expected = {
-                    "[one]" = "tahi",
-                    "[first]" = "tuatahi",
-                    "[two][second]" = "rua",
-                    "[three][third][thrice]" = "toru"
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two[second]" = "rua",
+                    "three[third][thrice]" = "toru"
                 }
 
                 actual = flattenStruct(input)
@@ -103,14 +103,48 @@ component extends=testbox.system.BaseSpec {
                     "four" = ["fourth", "quaternary", "wha", "tuawha"]
                 }
                 expected = {
-                    "[one]" = "tahi",
-                    "[first]" = "tuatahi",
-                    "[two][second]" = "rua",
-                    "[three][third][thrice]" = "toru",
-                    "[four][1]" = "fourth",
-                    "[four][2]" = "quaternary",
-                    "[four][3]" = "wha",
-                    "[four][4]" = "tuawha"
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two[second]" = "rua",
+                    "three[third][thrice]" = "toru",
+                    "four[0]" = "fourth",
+                    "four[1]" = "quaternary",
+                    "four[2]" = "wha",
+                    "four[3]" = "tuawha"
+                }
+
+                actual = flattenStruct(input)
+
+                expect(actual).toBe(expected)
+            })
+
+            it("qualifies the keys correctly and zero-indexes the arrays", () => {
+                input = {
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two" = {"second" = "rua"},
+                    "three" = {
+                        "third" = {"thrice" = "toru"}
+                    },
+                    "four" = ["fourth", "quaternary", "wha", "tuawha"],
+                    "five" = [
+                        {"fifth" = "rima"},
+                        ["tuarima"],
+                        "quinary"
+                    ]
+                }
+                expected = {
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two[second]" = "rua",
+                    "three[third][thrice]" = "toru",
+                    "four[0]" = "fourth",
+                    "four[1]" = "quaternary",
+                    "four[2]" = "wha",
+                    "four[3]" = "tuawha",
+                    "five[0][fifth]" = "rima",
+                    "five[1][0]" = "tuarima",
+                    "five[2]" = "quinary"
                 }
 
                 actual = flattenStruct(input)
@@ -121,24 +155,27 @@ component extends=testbox.system.BaseSpec {
     }
 
     function flattenStruct(required struct struct) {
-        flatten = (flattened, key, value, _, prefix="") => {
-            var prefixedKey = "#prefix#[#key#]"
+        flatten = (flattened, key, value, actual, prefix="") => {
+            var offsetKey = isArray(actual) ? key - 1 : key
+            var qualifiedKey = prefix.len() > 0 ? "[#offsetKey#]" : offsetKey
+            var prefixedKey = "#prefix##qualifiedKey#"
+
             if (isSimpleValue(value)) {
                 return flattened.append({"#prefixedKey#" = value})
             }
 
             if (isStruct(value)) {
                 return flattened.append(value.reduce(
-                    function (flattened={}, key, value, _, prefix=prefixedKey) {
-                        return flattened.append(flatten(flattened, key, value, _, prefix))
+                    function (flattened={}, key, value, actual, prefix=prefixedKey) {
+                        return flattened.append(flatten(flattened, key, value, actual, prefix))
                     },
                     {}
                 ))
             }
             if (isArray(value)) {
                 return flattened.append(value.reduce(
-                    function (flattened={}, value, index, _, prefix=prefixedKey) {
-                        return flattened.append(flatten(flattened, index, value, _, prefix))
+                    function (flattened={}, value, index, actual, prefix=prefixedKey) {
+                        return flattened.append(flatten(flattened, index, value, actual, prefix))
                     },
                     {}
                 ))
