@@ -71,7 +71,7 @@ component extends=testbox.system.BaseSpec {
                 expect(actual).toBe(expected)
             })
 
-            it("handles complex values", () => {
+            it("handles structs", () => {
                 input = {
                     "one" = "tahi",
                     "first" = "tuatahi",
@@ -91,6 +91,32 @@ component extends=testbox.system.BaseSpec {
 
                 expect(actual).toBe(expected)
             })
+
+            it("handles arrays values", () => {
+                input = {
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two" = {"second" = "rua"},
+                    "three" = {
+                        "third" = {"thrice" = "toru"}
+                    },
+                    "four" = ["fourth", "quaternary", "wha", "tuawha"]
+                }
+                expected = {
+                    "[one]" = "tahi",
+                    "[first]" = "tuatahi",
+                    "[two][second]" = "rua",
+                    "[three][third][thrice]" = "toru",
+                    "[four][1]" = "fourth",
+                    "[four][2]" = "quaternary",
+                    "[four][3]" = "wha",
+                    "[four][4]" = "tuawha"
+                }
+
+                actual = flattenStruct(input)
+
+                expect(actual).toBe(expected)
+            })
         })
     }
 
@@ -101,12 +127,22 @@ component extends=testbox.system.BaseSpec {
                 return flattened.append({"#prefixedKey#" = value})
             }
 
-            return flattened.append(value.reduce(
-                function (flattened, key, value, _, prefix=prefixedKey) {
-                    return flattened.append(flatten(flattened, key, value, _, prefix))
-                },
-                {}
-            ))
+            if (isStruct(value)) {
+                return flattened.append(value.reduce(
+                    function (flattened={}, key, value, _, prefix=prefixedKey) {
+                        return flattened.append(flatten(flattened, key, value, _, prefix))
+                    },
+                    {}
+                ))
+            }
+            if (isArray(value)) {
+                return flattened.append(value.reduce(
+                    function (flattened={}, value, index, _, prefix=prefixedKey) {
+                        return flattened.append(flatten(flattened, index, value, _, prefix))
+                    },
+                    {}
+                ))
+            }
         }
 
         return struct.reduce(flatten, {})
