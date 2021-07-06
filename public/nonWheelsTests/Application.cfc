@@ -15,5 +15,4 @@ component {
     this.datasource = "cfmlInDocker"
 
     this.localMode = "modern"
-
 }
