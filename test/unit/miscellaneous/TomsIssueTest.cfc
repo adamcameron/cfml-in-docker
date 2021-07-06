@@ -151,12 +151,50 @@ component extends=testbox.system.BaseSpec {
 
                 expect(actual).toBe(expected)
             })
+
+            it("handles arguments objects", () => {
+                input = {
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two" = {"second" = "rua"},
+                    "three" = {
+                        "third" = {"thrice" = "toru"}
+                    },
+                    "four" = ["fourth", "quaternary", "wha", "tuawha"],
+                    "five" = [
+                        {"fifth" = "rima"},
+                        ["tuarima"],
+                        "quinary"
+                    ],
+                    "six" = ((sixth, senary) => arguments)("ono", "tuaono", [6])
+                }
+                expected = {
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two[second]" = "rua",
+                    "three[third][thrice]" = "toru",
+                    "four[0]" = "fourth",
+                    "four[1]" = "quaternary",
+                    "four[2]" = "wha",
+                    "four[3]" = "tuawha",
+                    "five[0][fifth]" = "rima",
+                    "five[1][0]" = "tuarima",
+                    "five[2]" = "quinary",
+                    "six[sixth]" = "ono",
+                    "six[senary]" = "tuaono",
+                    "six[2][0]" = 6
+                }
+
+                actual = flattenStruct(input)
+
+                expect(actual).toBe(expected)
+            })
         })
     }
 
     function flattenStruct(required struct struct) {
         flatten = (flattened, key, value, actual, prefix="") => {
-            var offsetKey = isArray(actual) ? key - 1 : key
+            var offsetKey = isArray(actual) && isNumeric(key) ? key - 1 : key
             var qualifiedKey = prefix.len() > 0 ? "[#offsetKey#]" : offsetKey
             var prefixedKey = "#prefix##qualifiedKey#"
 
@@ -172,6 +210,7 @@ component extends=testbox.system.BaseSpec {
                     {}
                 ))
             }
+
             if (isArray(value)) {
                 return flattened.append(value.reduce(
                     function (flattened={}, value, index, actual, prefix=prefixedKey) {
