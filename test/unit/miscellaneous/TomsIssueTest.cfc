@@ -40,7 +40,9 @@ component extends=testbox.system.BaseSpec {
                     }
                 }
                 expected = {
-                    "[one]" = "tahi"
+                    "[one]" = "tahi",
+                    "[two][second]" = "rua",
+                    "[three][third][thrice]" = "toru"
                 }
 
                 actual = flattenStruct(input)
@@ -59,7 +61,30 @@ component extends=testbox.system.BaseSpec {
                 }
                 expected = {
                     "[one]" = "tahi",
-                    "[first]" = "tuatahi"
+                    "[first]" = "tuatahi",
+                    "[two][second]" = "rua",
+                    "[three][third][thrice]" = "toru"
+                }
+
+                actual = flattenStruct(input)
+
+                expect(actual).toBe(expected)
+            })
+
+            it("handles complex values", () => {
+                input = {
+                    "one" = "tahi",
+                    "first" = "tuatahi",
+                    "two" = {"second" = "rua"},
+                    "three" = {
+                        "third" = {"thrice" = "toru"}
+                    }
+                }
+                expected = {
+                    "[one]" = "tahi",
+                    "[first]" = "tuatahi",
+                    "[two][second]" = "rua",
+                    "[three][third][thrice]" = "toru"
                 }
 
                 actual = flattenStruct(input)
@@ -70,11 +95,20 @@ component extends=testbox.system.BaseSpec {
     }
 
     function flattenStruct(required struct struct) {
-        return struct.reduce((flattened, key, value) => {
+        flatten = (flattened, key, value, _, prefix="") => {
+            var prefixedKey = "#prefix#[#key#]"
             if (isSimpleValue(value)) {
-                return flattened.append({"[#key#]" = value})
+                return flattened.append({"#prefixedKey#" = value})
             }
-            return flattened
-        }, {})
+
+            return flattened.append(value.reduce(
+                function (flattened, key, value, _, prefix=prefixedKey) {
+                    return flattened.append(flatten(flattened, key, value, _, prefix))
+                },
+                {}
+            ))
+        }
+
+        return struct.reduce(flatten, {})
     }
 }
