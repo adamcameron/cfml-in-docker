@@ -1,7 +1,8 @@
 {
     "dependencies":{
         "cfwheels":"^2.2.0",
-        "logbox":"^6.4.0+1513"
+        "logbox":"^6.4",
+        "fw1":"^4.3.0"
     },
     "devDependencies":{
         "testbox":"^4.2.1+400"
@@ -9,7 +10,8 @@
     "installPaths":{
         "testbox":"vendor/testbox/",
         "cfwheels":"vendor/cfwheels/",
-        "logbox":"vendor/logbox/"
+        "logbox":"vendor/logbox/",
+        "fw1":"vendor/fw1/"
     },
     "testbox":{
         "runner":"http://localhost:8888/test/runTests.cfm?reportFormat=TextReporter"
