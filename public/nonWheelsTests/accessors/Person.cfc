@@ -13,7 +13,6 @@ component accessors=true invokeImplicitAccessor=true {
         variables.firstName = firstName
     }
 
-
     function check() {
         return [
             this = this,
