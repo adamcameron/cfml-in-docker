@@ -47,4 +47,8 @@ component extends=Controller {
 
         renderView(template="plugin", values=viewVariables)
     }
+
+    function testModelWithNonexistentClass() {
+        renderNothing()
+    }
 }

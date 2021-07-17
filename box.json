@@ -2,7 +2,7 @@
     "dependencies":{
         "cfwheels":"^2.2.0",
         "logbox":"^6.4",
-        "fw1":"^4.3.0"
+        "fw1":"^4.2.0"
     },
     "devDependencies":{
         "testbox":"^4.2.1+400"

@@ -30,9 +30,8 @@ component {
 
     this.mappings["/models"] = getCanonicalPath("#thisDirectory#models")
 
-    this.mappgins["/logbox"] = getCanonicalPath("#thisDirectory#../vendor/logbox")
-    this.mappgins["/fw1"] = getCanonicalPath("#thisDirectory#../vendor/fw1")
-
+    this.mappings["/logbox"] = getCanonicalPath("#thisDirectory#../vendor/logbox")
+    this.mappings["/fw1"] = getCanonicalPath("#thisDirectory#../vendor/fw1")
 
     testDirectory = getCanonicalPath("#thisDirectory#../tests")
     this.mappings["/public/tests"] = testDirectory
