@@ -1,0 +1,21 @@
+[filesystem "Oracle Corporation|11.0.9|overlay"]
+	timestampResolution = 5000 nanoseconds
+	minRacyThreshold = 19283 microseconds
+
+[credential]
+	helper = "!f() { /root/.vscode-server/bin/3c4e3df9e89829dce27b7b5c24508306b151f30d/node /tmp/vscode-remote-containers-389e8b3a6e53bc395a21fcf6d1e37265784332f1.js $*; }; f"
+
+[user]
+	email = cameron.adam@gmail.com
+	name = adamcameron
+
+[alias]
+	cap = "!f() { git add -A && git commit -m \"$@\" && git push; }; f"
+	canp = "!f() { git add -A && git commit -m \"$@\"; }; f"
+	tap = "!f() { git tag -am \"$1\" "$2" && git push --tags; }; f"
+    prb = "pull --rebase"
+	taglist = "tag --sort -v:refname -n"
+
+[core]
+	autocrlf = input
+	eol = lf

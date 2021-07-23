@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "../var/www"
+		}
+	],
+	"settings": {
+		"workbench.colorTheme": "Default Light+"
+	}
+}
