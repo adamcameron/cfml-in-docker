@@ -5,6 +5,10 @@ component extends=testbox.system.BaseSpec {
             it("can verify that true is, indeed, true", () => {
                 expect(true).toBe(true)
             })
+
+            it("fails a test so I can check exit code", () => {
+                expect(true).toBe(false)
+            })
         })
 
         describe("Stub tests to be analysed by 'tests beforeEach and afterEach'", () => {
