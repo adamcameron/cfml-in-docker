@@ -1,6 +1,7 @@
 component extends=testbox.system.BaseSpec {
 
     function run() {
+        // note: after some reconfig these are all proxying through to Lucee's index.cfm which is not what I want, but CBA fixing right now
         describe("Tests Nginx is serving static content files", () => {
 
             it("serves gdayWorld.html as 200-OK", () => {
