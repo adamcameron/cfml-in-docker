@@ -1,5 +1,5 @@
 import testbox.system.BaseSpec
-import cfmlInDocker.nonWheelsTests.mockExampleApp.*
+import cfmlInDocker.miscellaneous.mockExampleApp.*
 
 component extends=BaseSpec {
 
@@ -16,7 +16,7 @@ component extends=BaseSpec {
                 variables.mockedDao.$(method="insert", calllogging=true)
 
                 response = variables.numberController.handlePost({english="two", maori="rua"})
-                expect(response).toBeInstanceOf("cfmlInDocker.nonWheelsTests.mockExampleApp.Response")
+                expect(response).toBeInstanceOf("cfmlInDocker.miscellaneous.mockExampleApp.Response")
                 expect(response.statusCode).toBe(201)
 
                 callLog = variables.mockedDao.$callLog()
@@ -29,7 +29,7 @@ component extends=BaseSpec {
                 variables.mockedDao.$(method="insert", calllogging=true)
 
                 response = variables.numberController.handlePost({})
-                expect(response).toBeInstanceOf("cfmlInDocker.nonWheelsTests.mockExampleApp.ClientErrorResponse")
+                expect(response).toBeInstanceOf("cfmlInDocker.miscellaneous.mockExampleApp.ClientErrorResponse")
                 expect(response.statusCode).toBe(400)
                 expect(response.errors).toBe([
                     "english is required",

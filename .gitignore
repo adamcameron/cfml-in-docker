@@ -1,7 +1,6 @@
 /.idea/
 /var/
 /vendor/
-/src/wheels/
 /.history/
 CfmlInDockerOnHost.code-workspace
 /.vscode/

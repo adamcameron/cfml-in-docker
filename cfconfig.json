@@ -9,21 +9,6 @@
             "inspectTemplate":"once",
             "physical":"/var/www/test",
             "primary":"physical"
-        },
-        "/wheels":{
-            "inspectTemplate":"once",
-            "physical":"/var/www/src/wheels",
-            "primary":"physical"
-        },
-        "/fw1":{
-            "inspectTemplate":"once",
-            "physical":"/var/www/vendor/fw1",
-            "primary":"physical"
-        },
-        "/logbox":{
-            "inspectTemplate":"once",
-            "physical":"/var/www/vendor/logbox",
-            "primary":"physical"
         }
     }
 }

@@ -30,8 +30,6 @@ RUN echo exit | box
 RUN mkdir -p vendor
 RUN box install
 
-RUN cp -R /var/www/vendor/cfwheels/wheels /var/www/src/wheels
-
 RUN box install commandbox-cfconfig
 RUN box cfconfig import to=/opt/lucee/web from=/var/www/cfconfig.json
 

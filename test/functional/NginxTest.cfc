@@ -4,13 +4,13 @@ component extends=testbox.system.BaseSpec {
         describe("Tests Nginx is serving static content files", () => {
 
             it("serves gdayWorld.html as 200-OK", () => {
-                http url="http://cfml-in-docker.frontend/nonWheelsTests/gdayWorld.html" result="response";
+                http url="http://cfml-in-docker.frontend/gdayWorld.html" result="response";
 
                 expect(response.status_code).toBe(200, "HTTP status code incorrect")
                 expect(response.fileContent.trim()).toBe( "G'day world!", "Response body incorrect")
             })
 
-            testUris = ["/nonWheelsTests/gdayWorld.html", "/images/test.svg", "/stylesheets/test.css", "javascripts/test.js"]
+            testUris = ["/gdayWorld.html", "/images/test.svg", "/stylesheets/test.css", "javascripts/test.js"]
 
             testUris.each((uri) => {
                 it("serves #uri# via Nginx as 200-OK", () => {
@@ -23,8 +23,7 @@ component extends=testbox.system.BaseSpec {
             })
 
             testUris.map((uri) => "/INVALID#uri#").each((uri) => {
-                // currently skipping due to https://github.com/cfwheels/cfwheels/issues/1065
-                xit("serves #uri# as 404", () => {
+                it("serves #uri# as 404", () => {
                     http url="http://cfml-in-docker.frontend/#uri#" result="response";
 
                     expect(response.status_code).toBe(404, "HTTP status code incorrect")
