@@ -25,6 +25,8 @@ services:
         environment:
             - MARIADB_PASSWORD=${MARIADB_PASSWORD}
         volumes:
+            - ../src:/var/www/src
+            - ../test:/var/www/test
             - ../var/log/tomcat:/usr/local/tomcat/logs
             - ../var/log/lucee:/opt/lucee/web/logs
             - ./lucee/root_home/.bash_history:/root/.bash_history
